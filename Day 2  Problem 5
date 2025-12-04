@@ -1,0 +1,29 @@
+Day 2 
+Problem 5
+Count Binary Strings -- except consecutive 1s
+
+class Solution {
+    public static int CountB(int n, int pos, boolean prevOne) {
+        if(n == 0) return 0;
+        if(n == 1) return 2;
+        
+        if (pos == n) {
+            return 1; 
+        }
+        
+        int total = 0;
+        total += CountB(n, pos + 1, false);
+        
+        if (!prevOne) {
+            total += CountB(n, pos + 1, true);
+        }
+
+        return total;
+    }
+
+    public static void main(String[] args) {
+        int n = 70;
+        System.out.println(CountB(n, 0, false)); 
+    
+    }
+}
