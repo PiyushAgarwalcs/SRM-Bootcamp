@@ -1,0 +1,30 @@
+Day 3
+Problem 4
+78. Subsets
+
+class Solution {
+public:
+    void bt(vector<int>& nums, int i, vector<int>& current, vector<vector<int>>& result) {
+        if(i >= nums.size()){
+            result.push_back(current); 
+            return;
+        }
+
+        // Not pick
+        bt(nums, i + 1, current, result);
+
+        // Pick
+        current.push_back(nums[i]);
+        bt(nums, i + 1, current, result);
+
+        // Backtrack after picking or Don't pass by reference
+        // current.pop_back();
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> current;
+        bt(nums, 0, current, result);
+        return result;
+    }
+};
