@@ -1,0 +1,29 @@
+Day 3
+Problem 5
+39. Combination Sum
+
+
+class Solution {
+public:
+    void backtrack(vector<int>& candidates, int target, vector<int>& curr, vector<vector<int>>& ans, int sum, int index){
+        if(sum == target){
+            ans.push_back(curr);
+            return;
+        }
+        if(sum > target){
+            return;
+        }
+        for(int i=index; i<candidates.size(); i++){
+            curr.push_back(candidates[i]);
+            backtrack(candidates, target, curr, ans, sum + candidates[i], i);
+            curr.pop_back();
+        }
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> curr;
+        backtrack(candidates, target, curr, ans, 0, 0);
+        return ans;
+    }
+};
