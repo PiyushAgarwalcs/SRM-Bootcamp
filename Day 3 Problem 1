@@ -1,0 +1,27 @@
+Day 3
+Problem 1
+Rope cuting
+
+#include <iostream>
+int max(int a, int b){
+    if(a > b) return a;
+    return b;
+}
+int possible(int n){
+        if(n == 0){
+            return 0;
+        }    
+        if(n < 0){
+            return -10000;
+        }
+        int one = 1 + possible(n-5);
+        int two = 1 + possible(n-2);
+        int three = 1 + possible(n-3);
+
+        return max(one, max(two, three));
+    }
+int main() {
+    int n = 13;
+    std::cout << possible(n);
+    return 0;
+}
