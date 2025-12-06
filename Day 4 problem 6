@@ -1,0 +1,27 @@
+Day 4
+problem 6
+Coin change
+
+class Solution {
+public:
+    int helper(vector<int>& coins, int rem, vector<int>& dp){
+        if (rem < 0) return -1;
+        if (rem == 0) return 0;
+        if (dp[rem] != -2) return dp[rem];
+
+        int minCoins = INT_MAX;
+        for (int coin : coins) {
+            int res = helper(coins, rem - coin, dp);
+            if (res >= 0 && res < minCoins)
+                minCoins = res + 1;
+        }
+
+        dp[rem] = (minCoins == INT_MAX) ? -1 : minCoins;
+        return dp[rem];
+    }
+
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int> dp(amount + 1, -2);  // -2 means uncomputed
+        return helper(coins, amount, dp);
+    }
+};
