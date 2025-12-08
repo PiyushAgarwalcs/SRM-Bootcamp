@@ -1,0 +1,38 @@
+Day 5
+Problem 2
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> stk;
+
+        for(int a : asteroids){
+            bool destroyed = false;
+
+            while(!stk.empty() && a < 0 && stk.top() > 0){
+                if (stk.top() < -a) {
+                    stk.pop(); // top asteroid explodes
+                } else if (stk.top() == -a) {
+                    stk.pop(); // both explode
+                    destroyed = true;
+                    break;
+                } else {
+                    destroyed = true; // current asteroid explodes
+                    break;
+                }
+            }
+
+            if(!destroyed){
+                stk.push(a);
+            }
+        }
+
+        vector<int> result;
+        while(!stk.empty()){
+            result.insert(result.begin(), stk.top());
+            stk.pop();
+        }
+
+        return result;
+    }
+};
