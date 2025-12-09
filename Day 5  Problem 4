@@ -1,0 +1,28 @@
+Day 5 
+Problem 4
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.empty()) return 0;
+
+        unordered_set<int> hash(nums.begin(), nums.end());
+        
+        int maxi = 0;
+        for(int num : hash){
+            if(hash.find(num - 1) == hash.end()){
+                int cNum = num;
+                int cnt = 1;
+
+                while(hash.find(cNum + 1) != hash.end()){
+                    cNum++;
+                    cnt++;
+                }
+
+                maxi = max(maxi, cnt);
+            }
+        }
+
+        return maxi;
+    }
+};
